@@ -57,4 +57,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    st.subheader("tips: 所有类型的文件都能上传，但是只展示csv文件的内容")
+    st.write("tips: 所有类型的文件都能上传，但是只展示csv文件的内容")
