@@ -17,6 +17,15 @@ def save_uploaded_file(uploaded_file):
         return True
     return False
 
+def list_files(directory):
+    """列出目录中的所有文件并返回它们"""
+    files = []
+    for filename in os.listdir(directory):
+        path = os.path.join(directory, filename)
+        if os.path.isfile(path):
+            files.append(filename)
+    return files
+
 def main():
     st.title("文件上传示例")
 
@@ -27,6 +36,16 @@ def main():
             st.success(f"文件 {uploaded_file.name} 已成功上传到服务器！")
         else:
             st.error("文件上传失败。")
+
+    # 列出已上传的文件
+    if st.checkbox("显示已上传的文件"):
+        files = list_files(UPLOAD_DIRECTORY)
+        if files:
+            for f in files:
+                with open(os.path.join(UPLOAD_DIRECTORY, f), "rb") as file:
+                    st.download_button(label=f"下载 {f}", data=file, file_name=f, mime='application/octet-stream')
+        else:
+            st.write("上传目录中没有文件。")
 
 if __name__ == "__main__":
     main()
