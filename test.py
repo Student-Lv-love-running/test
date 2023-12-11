@@ -2,9 +2,6 @@ import streamlit as st
 import os
 import pandas as pd
 
-# 隐藏 Streamlit 的品牌图标
-# st.set_page_config(page_title='My App', page_icon=':shark:', layout='wide', initial_sidebar_state='expanded', menu_items={'Get Help': None, 'Report a bug': None, 'About': None})
-
 # 设置上传文件的保存目录
 UPLOAD_DIRECTORY = "./uploaded_files"
 
@@ -30,34 +27,48 @@ def list_files(directory):
             files.append(filename)
     return files
 
-def main():
-    st.title("文件上传")
+def delete_file(filename):
+    """删除指定的文件"""
+    file_path = os.path.join(UPLOAD_DIRECTORY, filename)
+    if os.path.exists(file_path):
+        os.remove(file_path)
+        return True
+    return False
 
+# 侧边栏
+with st.sidebar:
+    st.title("文件上传")
     uploaded_file = st.file_uploader("选择一个文件", type=None)  # 允许任何类型的文件
     if uploaded_file is not None:
         # 文件保存到服务器
         file_path = save_uploaded_file(uploaded_file)
         if file_path:
             st.success(f"文件 {uploaded_file.name} 已成功上传到服务器！")
-            # 如果文件是 CSV 文件，读取并显示
-            if uploaded_file.name.endswith('.csv'):
-                df = pd.read_csv(file_path)
-                st.write(df)
-            else:
-                st.info("已上传非 CSV 文件，无法显示内容。")
         else:
             st.error("文件上传失败。")
 
-    # 列出已上传的文件
-    if st.checkbox("显示已上传的文件"):
-        files = list_files(UPLOAD_DIRECTORY)
-        if files:
-            for f in files:
-                with open(os.path.join(UPLOAD_DIRECTORY, f), "rb") as file:
-                    st.download_button(label=f"下载 {f}", data=file, file_name=f, mime='application/octet-stream')
-        else:
-            st.write("上传目录中没有文件。")
+# 主页面
+st.title("已上传的文件")
 
-if __name__ == "__main__":
-    main()
-    st.write("tips: 所有类型的文件都能上传，但是只展示csv文件的内容")
+# 列出已上传的文件，并添加删除选项
+files = list_files(UPLOAD_DIRECTORY)
+if files:
+    # 文件选择器
+    selected_file = st.selectbox("选择一个文件来查看内容", files)
+    # 删除按钮
+    if st.button(f"删除 {selected_file}"):
+        if delete_file(selected_file):
+            st.success(f"文件 {selected_file} 已删除")
+            files = list_files(UPLOAD_DIRECTORY)  # 更新文件列表
+        else:
+            st.error(f"文件 {selected_file} 删除失败")
+    
+    # 显示选中的文件内容
+    file_path = os.path.join(UPLOAD_DIRECTORY, selected_file)
+    if selected_file.endswith('.csv'):
+        df = pd.read_csv(file_path)
+        st.write(df)
+    else:
+        st.info("选中的文件不是CSV格式，无法显示内容。")
+else:
+    st.write("上传目录中没有文件。")
