@@ -50,18 +50,32 @@ with st.sidebar:
 # 主页面
 st.title("已上传的文件")
 
-# 列出已上传的文件，并添加删除选项
+# 列出已上传的文件，并添加删除和下载选项
 files = list_files(UPLOAD_DIRECTORY)
 if files:
     # 文件选择器
     selected_file = st.selectbox("选择一个文件来查看内容", files)
-    # 删除按钮
-    if st.button(f"删除 {selected_file}"):
-        if delete_file(selected_file):
-            st.success(f"文件 {selected_file} 已删除")
-            files = list_files(UPLOAD_DIRECTORY)  # 更新文件列表
-        else:
-            st.error(f"文件 {selected_file} 删除失败")
+    
+    # 文件操作按钮
+    col1, col2 = st.columns(2)
+    with col1:
+        # 删除按钮
+        if st.button(f"删除 {selected_file}"):
+            if delete_file(selected_file):
+                st.success(f"文件 {selected_file} 已删除")
+                files = list_files(UPLOAD_DIRECTORY)  # 更新文件列表
+            else:
+                st.error(f"文件 {selected_file} 删除失败")
+
+    with col2:
+        # 下载按钮
+        with open(os.path.join(UPLOAD_DIRECTORY, selected_file), "rb") as fp:
+            btn = st.download_button(
+                label="下载文件",
+                data=fp,
+                file_name=selected_file,
+                mime="text/csv" if selected_file.endswith('.csv') else 'application/octet-stream',
+            )
     
     # 显示选中的文件内容
     file_path = os.path.join(UPLOAD_DIRECTORY, selected_file)
@@ -72,3 +86,6 @@ if files:
         st.info("选中的文件不是CSV格式，无法显示内容。")
 else:
     st.write("上传目录中没有文件。")
+    
+
+	
