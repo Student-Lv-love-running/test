@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 # 隐藏 Streamlit 的品牌图标
-st.set_page_config(page_title='My App', page_icon=':shark:', layout='wide', initial_sidebar_state='expanded', menu_items={'Get Help': None, 'Report a bug': None, 'About': None})
+# st.set_page_config(page_title='My App', page_icon=':shark:', layout='wide', initial_sidebar_state='expanded', menu_items={'Get Help': None, 'Report a bug': None, 'About': None})
 
 # 设置上传文件的保存目录
 UPLOAD_DIRECTORY = "./uploaded_files"
