@@ -5,7 +5,7 @@ import psutil
 import matplotlib.pyplot as plt
 import matplotlib as font_manager
 
-font_path = '../Static-resources/wryh.ttf'
+font_path = 'Static-resources/wryh.ttf'
 font_manager.fontManager.addfont(font_path)
 plt.rcParams['font.family']='wryh'
 
