@@ -1,0 +1,24 @@
+/* 侧边栏整体样式 */
+.css-1e5imcs {
+	background-color: #f1f3f6; /* 侧边栏背景色 */
+	color: black; /* 字体颜色 */
+	padding: 10px; /* 内边距 */
+}
+
+/* 侧边栏标题样式 */
+.css-1e5imcs h1 {
+	color: black;
+}
+
+/* 侧边栏单选按钮样式 */
+.stRadio > div {
+	font-size: 16px; /* 字体大小 */
+	color: #4f8bf9; /* 字体颜色 */
+}
+
+/* 单选按钮选中样式 */
+.stRadio > div > label > div:first-child {
+	background-color: #4f8bf9; /* 选中背景色 */
+	color: #ffffff; /* 选中字体颜色 */
+}
+

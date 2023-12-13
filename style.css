@@ -1,0 +1,28 @@
+/* style.css */
+
+/* Hide the circle before radio buttons */
+.stRadio > div[role='radiogroup'] > label > div:first-child {
+    display: none;
+}
+
+/* Hide the sidebar border */
+.css-1d391kg {
+    border: none !important;
+}
+
+/* Increase specificity */
+.sidebar .css-1e5imcs .stRadio > div[role='radiogroup'] > label > div:first-child {
+    display: none !important;
+}
+
+.row-widget.stButton > button {
+    display: block;
+    width: 100%;
+}
+.css-2trqyj {
+    padding-left: 0;
+}
+.main .block-container {
+    max-width: none;
+    padding-left: 3.5rem;  /* Or the amount of padding you prefer */
+}
