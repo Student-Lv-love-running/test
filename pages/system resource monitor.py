@@ -5,7 +5,7 @@ import psutil
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
 
-font_manager.fontManager.addfont('字体/SimHei.ttf') #临时注册新的全局字体
+font_manager.fontManager.addfont('SimHei.ttf') #临时注册新的全局字体
 plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
 
 # plt.rcParams['font.sans-serif'] = ['DejaVu Sans']  # 设置中文字体为黑体
