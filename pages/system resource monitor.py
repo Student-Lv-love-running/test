@@ -23,9 +23,9 @@ def system_monitor_page():
         cpu_percent = psutil.cpu_percent(interval=1, percpu=True)
         fig, ax = plt.subplots()
         ax.plot(cpu_percent, marker='o')
-        ax.set_xlabel('CPU cores')
-        ax.set_ylabel('Usage ratio (%)')
-        ax.set_title('CPU Usage ratio')
+        ax.set_xlabel('CPU Cores')
+        ax.set_ylabel('Usage Ratio (%)')
+        ax.set_title('CPU Usage Ratio')
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
         ax.set_xticks(range(len(cpu_percent)))
@@ -41,7 +41,7 @@ def system_monitor_page():
         # plt.figure(figsize=(10, 8))  # 可以调整图形大小
         ax1.pie([memory.used, memory.total - memory.used], labels=['Used', 'Unused'], autopct='%1.1f%%', startangle=90)
         ax1.axis('equal')
-        plt.title('RAM usage status')
+        plt.title('RAM Usage Status')
         st.pyplot(fig1)
     
     col3, space2, col4 = st.columns([5,1,5])
@@ -55,8 +55,8 @@ def system_monitor_page():
         ax.spines['top'].set_visible(False)
         # 假设disk_io.read_bytes和disk_io.write_bytes包含了需要展示的数据
         io_data = [disk_io.read_bytes, disk_io.write_bytes]
-        ax.bar(['读取', '写入'], io_data)
-        ax.set_title('磁盘IO')
+        ax.bar(['Read', 'Write'], io_data)
+        ax.set_title('Disk IO')
         # 在这里添加其他你需要的matplotlib的代码来美化图表
         st.pyplot(fig)
 
