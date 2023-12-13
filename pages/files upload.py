@@ -54,6 +54,16 @@ def view_files_page():
                 st.experimental_rerun()
             else:
                 st.error(f"文件 {selected_file} 删除失败")
+        
+        # 添加下载按钮
+        with open(os.path.join(UPLOAD_DIRECTORY, selected_file), "rb") as file:
+            btn = st.download_button(
+                label="下载文件",
+                data=file,
+                file_name=selected_file,
+                mime="text/csv" if selected_file.endswith('.csv') else "application/octet-stream"
+            )
+
         if selected_file.endswith('.csv'):
             df = pd.read_csv(os.path.join(UPLOAD_DIRECTORY, selected_file))
             st.write(df)
