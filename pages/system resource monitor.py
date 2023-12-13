@@ -3,10 +3,12 @@ import os
 import pandas as pd
 import psutil
 import matplotlib.pyplot as plt
-from matplotlib import font_manager
+import matplotlib.font_manager as fm
 
-font_manager.fontManager.addfont('SimHei.ttf') #临时注册新的全局字体
-plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
+fonts = fm.findSystemFonts()
+for font in fonts:
+    prop = fm.FontProperties(fname=font)
+    print(prop.get_name())
 
 # plt.rcParams['font.sans-serif'] = ['DejaVu Sans']  # 设置中文字体为黑体
 plt.rcParams['axes.unicode_minus'] = False  # 正确显示负号
