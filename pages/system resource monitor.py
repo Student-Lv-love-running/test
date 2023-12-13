@@ -10,7 +10,7 @@ available_fonts = font_manager.findSystemFonts(fontpaths=None, fontext='ttf')
 print("\n\n\n------------------------------\n\n\n")
 print([font for font in available_fonts if 'CJK' in font])
 
-plt.rcParams['font.sans-serif'] = ['Microsoft YaHei']  # 设置中文字体为黑体
+plt.rcParams['font.sans-serif'] = ['Noto Sans CJK']  # 设置中文字体为黑体
 plt.rcParams['axes.unicode_minus'] = False  # 正确显示负号
 
 def system_monitor_page():
