@@ -3,12 +3,11 @@ import os
 import pandas as pd
 import psutil
 import matplotlib.pyplot as plt
-import matplotlib.font_manager as fm
+import matplotlib as font_manager
 
-fonts = fm.findSystemFonts()
-for font in fonts:
-    prop = fm.FontProperties(fname=font)
-    print(prop.get_name())
+font_path = '../Static-resources/wryh.ttf'
+font_manager.fontManager.addfont(font_path)
+plt.rcParams['font.family']='wryh'
 
 # plt.rcParams['font.sans-serif'] = ['DejaVu Sans']  # 设置中文字体为黑体
 plt.rcParams['axes.unicode_minus'] = False  # 正确显示负号
