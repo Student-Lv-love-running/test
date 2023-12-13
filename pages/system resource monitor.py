@@ -5,7 +5,7 @@ import psutil
 import matplotlib.pyplot as plt
 
 # plt.rcParams['font.sans-serif'] = ['DejaVu Sans']  # 设置中文字体为黑体
-plt.rcParams['axes.unicode_minus'] = False  # 正确显示负号
+# plt.rcParams['axes.unicode_minus'] = False  # 正确显示负号
 
 def system_monitor_page():
     st.title("系统资源监控")
@@ -44,6 +44,7 @@ def system_monitor_page():
         plt.title('RAM Usage Status')
         st.pyplot(fig1)
     
+    st.markdown("<br>", unsafe_allow_html=True) 
     col3, space2, col4 = st.columns([5,1,5])
     with col3:
         st.subheader("磁盘IO")
