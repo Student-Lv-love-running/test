@@ -3,11 +3,6 @@ import os
 import pandas as pd
 import psutil
 import matplotlib.pyplot as plt
-import matplotlib as font_manager
-
-font_path = 'Static-resources/wryh.ttf'
-font_manager.fontManager.addfont(font_path)
-plt.rcParams['font.family']='wryh'
 
 # plt.rcParams['font.sans-serif'] = ['DejaVu Sans']  # 设置中文字体为黑体
 plt.rcParams['axes.unicode_minus'] = False  # 正确显示负号
