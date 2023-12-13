@@ -29,7 +29,7 @@ def system_monitor_page():
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
         ax.set_xticks(range(len(cpu_percent)))
-        ax.set_xticklabels([f'core {i}' for i in range(len(cpu_percent))])
+        ax.set_xticklabels([f'c {i}' for i in range(len(cpu_percent))])
         for i, val in enumerate(cpu_percent):
             ax.text(i, val, f"{val:.2f}%", ha='center', va='bottom')
         st.pyplot(fig)
