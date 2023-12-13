@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # 设置上传文件的保存目录
 UPLOAD_DIRECTORY = "./uploaded_files"
@@ -43,6 +44,28 @@ def delete_file(filename):
         return True
     return False
 
+def plot_bar_chart(df):
+    # 确保 DataFrame 有足够的列来绘制柱状图
+    if df.shape[1] < 2:
+        st.error("CSV 文件至少需要包含两列数据来绘制柱状图。")
+        return
+    
+    # 使用 DataFrame 的第一列作为 X 轴，第二列作为 Y 轴
+    x = df.iloc[:, 0]
+    y = df.iloc[:, 1]
+    
+    # 创建柱状图
+    plt.figure(figsize=(10, 4))
+    bars = plt.bar(x, y, color=plt.cm.get_cmap('tab20', len(x))(range(len(x))))
+    
+    # 为每个柱子添加标签
+    for bar in bars:
+        yval = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2, yval, round(yval, 2), ha='center', va='bottom')
+
+    # 显示图表
+    st.pyplot(plt)
+
 def view_files_page():
     st.title("已上传的文件")
     files = list_files(UPLOAD_DIRECTORY)
@@ -55,7 +78,7 @@ def view_files_page():
             else:
                 st.error(f"文件 {selected_file} 删除失败")
         
-        # 添加下载按钮
+         # 添加下载按钮
         with open(os.path.join(UPLOAD_DIRECTORY, selected_file), "rb") as file:
             btn = st.download_button(
                 label="下载文件",
@@ -67,6 +90,8 @@ def view_files_page():
         if selected_file.endswith('.csv'):
             df = pd.read_csv(os.path.join(UPLOAD_DIRECTORY, selected_file))
             st.write(df)
+            # 调用绘制柱状图的函数
+            plot_bar_chart(df)
         else:
             st.info("选中的文件不是CSV格式，无法显示内容。")
     else:
