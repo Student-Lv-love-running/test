@@ -7,6 +7,7 @@ from matplotlib import font_manager
 
 available_fonts = font_manager.findSystemFonts(fontpaths=None, fontext='ttf')
 # 可以打印全部字体，或者搜索包含 'CJK' 字样的字体
+print("\n\n\n------------------------------\n\n\n")
 print([font for font in available_fonts if 'CJK' in font])
 
 plt.rcParams['font.sans-serif'] = ['Microsoft YaHei']  # 设置中文字体为黑体
