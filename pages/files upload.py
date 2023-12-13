@@ -91,7 +91,7 @@ def view_files_page():
             df = pd.read_csv(os.path.join(UPLOAD_DIRECTORY, selected_file))
             st.write(df)
             # 调用绘制柱状图的函数
-            plot_bar_chart(df)
+            # plot_bar_chart(df)
         else:
             st.info("选中的文件不是CSV格式，无法显示内容。")
     else:
